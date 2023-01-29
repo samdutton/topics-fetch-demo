@@ -1,4 +1,4 @@
-/* Copyright 2023 Google LLC.
+/* Copyright 2021 Google LLC.
 SPDX-License-Identifier: Apache-2.0 */
 
 :root {
@@ -12,61 +12,80 @@ SPDX-License-Identifier: Apache-2.0 */
 }
 
 .warning {
-  font-weight: bold;
-}
-
-blockquote {
-  font-family: monospace;
-  font-size: 17px;
-  line-height: 1.5em;
-  margin: 0;
-  padding: 0 20px;  
+  font-weight: 500;
 }
 
 body {
   font-family: sans-serif;
   font-weight: 500;
-  margin: 15px;
+  margin: 10px 15px 0 15px;
+}
+
+div#log {
+  background-color: #ffffee;
+/*   border: 1px solid yellow; */
+  font-family: monospace;
+  font-size: 19px;
+  line-height: 1.5em;
+  margin: 40px 0 40px 0;
+  height: 150px;
+  overflow-y: scroll;
+  resize: vertical;
+  padding: 20px 20px 45px 20px;
+}
+
+div#log div {
+  border-bottom: 1px solid #eeeeee;
+  margin: 0 0 20px 0;
+  padding: 0 0 20px 0;
+}
+
+div#log div:last-of-type {
+  border-bottom: none;
+  padding: 0;
+}
+
+footer {
+  line-height: 2em;
+  margin: 0 auto;
+  max-width: 1000px;
 }
 
 h1 {
   border-bottom: 1px solid #cccccc;
   font-size: 28px;
-  font-weight: 300;
+  font-weight: 500;
   margin: 0 0 60px 0;
   padding: 0 0 10px 0;
 }
 
 h2 {
   border-bottom: 1px solid #cccccc;
-  margin: 60px 0 10px 0;
+  font-weight: 300;
+  margin: 60px 0 30px 0;
   padding: 0 0 10px 0;
-}
-
-div#fetch-data {
-  background-color: #ffeeee;
-  /*   border: 1px solid yellow; */
-  font-family: monospace;
-  font-size: 17px;
-  line-height: 1.5em;
-  margin: 40px 0 40px 0;
-  overflow-y: scroll;
-  padding: 0 20px 0 20px;
 }
 
 li {
   font-size: 19px;
+  font-weight: 200;
   line-height: 1.5em;
-} 
+  margin: 0 0 20px -22px;
+}
 
 main {
-  margin: 0 auto 80px auto;
+  margin: 0 auto;
   max-width: 1000px;
+}
+
+ol {
+  margin: 25px 0 0 0;
 }
 
 p {
   font-size: 19px;
-  font-weight: 400;
+  font-weight: 200;
+  line-height: 1.5em;
 }
 
 p#find-out-more {
@@ -82,9 +101,22 @@ p#troubleshooting {
 }
 
 pre {
+  background-color: #eeeeee;
+  border: 1px solid #cccccc;
   font-size: 16px;
   line-height: 1.5em;
+  overflow: scroll;
+  padding: 10px;
 }
+
+summary {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 300;
+  padding: 30px 0 0 0;
+}
+
+
 
 @media (min-width: 400px) {
   
@@ -93,22 +125,17 @@ pre {
     font-weight: 500;
   }
 
-  p {
-    font-weight: 400;
-    line-height: 1.5em;
-  }
-
 }
 
 @media (min-width: 500px) {
 
   body {
-    margin: 70px;
+    margin: 70px 70px 0 70px;
   }
 
   h1 {
     font-size: 36px;
     font-weight: 100;
   }
-  
+
 }
