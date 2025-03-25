@@ -1,38 +1,108 @@
-<!-- Copyright 2022 Google LLC.
-SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2024 Google LLC. SPDX-License-Identifier: Apache-2.0 -->
 
 <!DOCTYPE html>
 <html lang="en">
+
+<head>
   
-  <head>
-    <title>Topics fetch demo</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/main.css">
-    <link href="favicon.ico" rel="shortcut icon">
-    <script src="js/main.js" defer></script>
+  <title>Topics header demo</title>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link href="favicon.ico" rel="shortcut icon">
+
+  <script type="module" src="js/main.js" defer></script>
+
   </head>
 
-  <body>
+<body>
 
-    <main>
-    
-      <h1>↩️ Topics fetch request header demo</h1>
+  <main>
+
+    <h1>Topics API header demo</h1>
             
-      <p>This site is part of a Topics API demo that shows how topics can be marked as observed, and then accessed, by using a `fetch()` request.</p>
-      
-      <p>Code in <a href="js/main.js">js/main.js</a> makes the following request every two seconds:</p>
-      
-      <blockquote><pre>fetch('https://topics-demo.glitch.me/send-topics', 
-  {browsingTopics: true});</pre></blockquote>
-      
-      <p>The response from the service running at <a href="https://topics-server.glitch.me">topics-server.glitch.me</a> includes the request headers in the body, and an <code>Observe-Browsing-Topics: ?1</code> header. This header instructs the browser that the topics provided in the <code>fetch()</code> request <code>Sec-Browsing-Topics</code> header should be used for topics calculation.</p>
-      
-      <p>If a request includes topics (which will happen if topics have been observed by code whose origin is topics-demo.glitch.me) the topics will be displayed below.</p>
+    <p>This page links to three sites that show how topics can be marked as observed, and then accessed, by using the headers from a `fetch()` request.</p>
+
+    <p>(By comparison, the demo sites linked from <a href="https://topics-demo.glitch.me">topics-demo.glitch.me</a> call <code>document.browsingTopics()</code> from an iframe to observe and access topics.)</p>
+
+    <h2>Run the demo</h2>
+
+    <p>Open Chrome 111 (or above) from the command line using the following <a href="https://www.chromium.org/developers/how-tos/run-chromium-with-flags">feature flags</a>:</p>
+
+    <pre>--enable-features=BrowsingTopics,BrowsingTopicsParameters:time_period_per_epoch/15s/max_epoch_introduction_delay/3s,PrivacySandboxAdsAPIsOverride,PrivacySandboxSettings3,OverridePrivacySandboxSettingsLocalTesting</pre>
+
+    <p>Make sure that chrome://flags/#privacy-sandbox-ads-apis is <strong>disabled</strong>, since the defaults from this will override the command-line flags (in particular, the epoch duration).</p>
     
-    </main>
+    <p>This site is awaiting <a href="https://developer.chrome.com/blog/announce-enrollment-privacy-sandbox/">enrollment</a>, so enable <code>chrome://flags/#privacy-sandbox-enrollment-overrides</code> and add the following URLs:
+<br><br>
+<code>https://topics-server.glitch.me,https://topics-demo.glitch.me,https://pets-animals-pets-cats.glitch.me,https://cats-cats-cats-cats.glitch.me,https://cats-pets-animals-pets.glitch.me,https://topics-fetch-demo.glitch.me,https://tennis-tennis.glitch.me,https://tennis-tennis-tennis.glitch.me,https://baseball-baseball.glitch.me,https://cricket-cricket.glitch.me</code></p>
+    
+    <p>Alternatively, include the command line flag <code>--args --disable-features=EnforcePrivacySandboxAttestations</code></p>
+
+    <p>Each of the following sites makes the same <code>fetch()</code> request to <a href="https://topics-server.glitch.me">topics-server.glitch.me</a>:</p>
       
-  </body>
+    <ul>
+      <li><a href="https://tennis-tennis.glitch.me">tennis-tennis.glitch.me</a></li>
+      <li><a href="https://tennis-tennis-tennis.glitch.me">tennis-tennis-tennis.glitch.me</a></li>
+      <li><a href="https://baseball-baseball.glitch.me">baseball-baseball.glitch.me</a></li>
+      <li><a href="https://cricket-cricket.glitch.me">cricket-cricket.glitch.me</a></li>
+    </ul>
+      
+    <p>Open each of these in a new browser tab. Observed topics will be displayed on these pages after three <a href="https://developer.chrome.com/docs/privacy-sandbox/topics/#how-does-the-topics-api-work">epochs</a> have passed, i.e. after around 45 seconds if you have set the epoch length to 15 seconds, though it may take longer. The observed topics are likely to be those such as <a href="https://github.com/patcg-individual-drafts/topics/blob/main/taxonomy_v1.md#:~:text=299">299</a> or <a href="https://github.com/patcg-individual-drafts/topics/blob/main/taxonomy_v1.md#:~:text=328">328</a> that correspond to an interest in sports and tennis.</p>
+    <p>If no topics are displayed, navigate repeatedly to the pages listed above, e.g. by refreshing each page (not hard-refresh).</p>
+          
+    <p class="warning">This demo isn't anything like a real-world implementation: it only serves to show how topics can be marked as observed, and accessed, using headers.</p>
+     
+  </main>
+
+  <footer>
+
+    <details>
+    
+      <summary>Troubleshooting</summary>
+    
+      <p>If the demo doesn't work as expected, make sure of the following:</p>
+
+      <ul>
+         <li>You're using Chrome 111 or above.</li>
+         <li>You've run Chrome from the command line using the flags described above.</li>
+         <li>You've followed visited the sites listed above.</li>
+         <li>chrome://flags/#privacy-sandbox-ads-apis is <strong>disabled</strong>, since the defaults from this (if enabled) will override the command-line flags (in particular, the epoch duration).</li>
+         <li>You don't have an adblocker or a similar app/extension running.</li>
+         <li>You're not in Incognito mode.</li>
+         <li>You have third-party cookies enabled via Settings → Security and privacy → Cookies, and other site data set to either "Allow all cookies" or "Block third-party cookies in incognito", also accessible via chrome://settings/cookies.</li>
+         <li>Make sure Chrome is not running in the background. Try closing <strong>all</strong> instances of Chrome before launching it from the console.</li>
+      </ul>
+      
+    </details>
+
+
+    <details>
+      
+      <summary>Comments and suggestions</summary>
+
+      <ul>
+        <li>If you find bugs with this demo or would like to suggest changes, please message <a href="https://twitter.com/sw12">@sw12</a>. You can also post a comment on <a href="https://github.com/privacysandbox/privacy-sandbox-demos/discussions/253">Privacy Sandbox Demos Discussions</a></li>
+        <li>To comment on the API design, please <a href="https://github.com/patcg-individual-drafts/topics/issues/new">create an issue</a> on the explainer repo.</li>
+        <li>For general feedback or questions about the Privacy Sandbox, please ask on the <a href="https://github.com/GoogleChromeLabs/privacy-sandbox-dev-support/issues">Privacy Sandbox Dev Support repo</a>.</li>
+      </ul>
+
+
+    </details>
+
+    <h2>Find out more</h2>
+
+    <ul>
+      <li><a href="https://developer.chrome.com/docs/privacy-sandbox/topics/">The Topics API</a></li>
+
+      <li><a href="https://glitch.com/edit/#!/topics-fetch-demo">Code for this demo</a></li>
+    </ul>
+     
+  </footer>
+
+</body>
 
 </html>
