@@ -14,11 +14,15 @@ That page also provides a troubleshooting checklist and explains how to get supp
 
 ## Comments and suggestions
 
-If you find bugs with this demo or would like to suggest changes, please message [@sw12](https//twitter.com/sw12).
+If you find bugs with this demo or would like to suggest changes, please message [@sw12](https//twitter.com/sw12).  You can also post a comment on [Privacy Sandbox Demos Discussions](https://github.com/privacysandbox/privacy-sandbox-demos/discussions/253). 
+
+# Find out more
+
+[The Topics API](https://developers.google.com/privacy-sandbox/relevance/topics/developer-guide) provides a developer guide, integration guide, and API reference.
 
 ## License
 
-Copyright 2023 Google, Inc.
+Copyright 2024 Google, Inc.
 
 Licensed to the Apache Software Foundation (ASF) under one or more contributor license agreements. See the NOTICE file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file to you under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

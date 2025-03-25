@@ -1,4 +1,4 @@
-<!-- Copyright 2022 Google LLC. SPDX-License-Identifier: Apache-2.0 -->
+<!-- Copyright 2024 Google LLC. SPDX-License-Identifier: Apache-2.0 -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,44 +10,51 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--   <meta http-equiv="origin-trial" content="AgIhMU5ArY5bxTxFCAcZtak2lcrRi93xjkix11sAJSTGHfOtMK+1mJg41mhiRssV1JD+irwg+lJT9lhrHxg0hwUAAABkeyJvcmlnaW4iOiJodHRwczovL3RvcGljcy1kZW1vLmdsaXRjaC5tZTo0NDMiLCJmZWF0dXJlIjoiUHJpdmFjeVNhbmRib3hBZHNBUElzIiwiZXhwaXJ5IjoxNjYxMjk5MTk5fQ=="> -->
+
   <link rel="stylesheet" href="css/main.css">
   <link href="favicon.ico" rel="shortcut icon">
 
-  <script type="module" src="js/taxonomy.js"></script>
   <script type="module" src="js/main.js" defer></script>
 
   </head>
 
 <body>
 
-   <main>
+  <main>
 
-      <h1>↩️ Topics API header demo</h1>
+    <h1>Topics API header demo</h1>
             
-      <p>This page links to three sites that show how topics can be marked as observed, and then accessed, by using the headers from a `fetch()` request.</p>
-     
-     <p>(By comparison, the demo sites linked from <a href="https://topics-demo.glitch.me">topics-demo.glitch.me</a> call <code>document.browsingTopics()</code> from an iframe to observe and access topics.)</p>
+    <p>This page links to three sites that show how topics can be marked as observed, and then accessed, by using the headers from a `fetch()` request.</p>
 
-      <h2>Run the demo</h2>
+    <p>(By comparison, the demo sites linked from <a href="https://topics-demo.glitch.me">topics-demo.glitch.me</a> call <code>document.browsingTopics()</code> from an iframe to observe and access topics.)</p>
 
-      <p>Open Chrome 111 (or above) from the command line using the following <a href="https://www.chromium.org/developers/how-tos/run-chromium-with-flags">feature flags</a>:</p>
+    <h2>Run the demo</h2>
+
+    <p>Open Chrome 111 (or above) from the command line using the following <a href="https://www.chromium.org/developers/how-tos/run-chromium-with-flags">feature flags</a>:</p>
+
+    <pre>--enable-features=BrowsingTopics,BrowsingTopicsParameters:time_period_per_epoch/15s/max_epoch_introduction_delay/3s,PrivacySandboxAdsAPIsOverride,PrivacySandboxSettings3,OverridePrivacySandboxSettingsLocalTesting</pre>
+
+    <p>Make sure that chrome://flags/#privacy-sandbox-ads-apis is <strong>disabled</strong>, since the defaults from this will override the command-line flags (in particular, the epoch duration).</p>
+    
+    <p>This site is awaiting <a href="https://developer.chrome.com/blog/announce-enrollment-privacy-sandbox/">enrollment</a>, so enable <code>chrome://flags/#privacy-sandbox-enrollment-overrides</code> and add the following URLs:
+<br><br>
+<code>https://topics-server.glitch.me,https://topics-demo.glitch.me,https://pets-animals-pets-cats.glitch.me,https://cats-cats-cats-cats.glitch.me,https://cats-pets-animals-pets.glitch.me,https://topics-fetch-demo.glitch.me,https://tennis-tennis.glitch.me,https://tennis-tennis-tennis.glitch.me,https://baseball-baseball.glitch.me,https://cricket-cricket.glitch.me</code></p>
+    
+    <p>Alternatively, include the command line flag <code>--args --disable-features=EnforcePrivacySandboxAttestations</code></p>
+
+    <p>Each of the following sites makes the same <code>fetch()</code> request to <a href="https://topics-server.glitch.me">topics-server.glitch.me</a>:</p>
       
-      <pre>--enable-features=BrowsingTopics:time_period_per_epoch/15s,PrivacySandboxAdsAPIsOverride,PrivacySandboxSettings3,OverridePrivacySandboxSettingsLocalTesting</pre>
+    <ul>
+      <li><a href="https://tennis-tennis.glitch.me">tennis-tennis.glitch.me</a></li>
+      <li><a href="https://tennis-tennis-tennis.glitch.me">tennis-tennis-tennis.glitch.me</a></li>
+      <li><a href="https://baseball-baseball.glitch.me">baseball-baseball.glitch.me</a></li>
+      <li><a href="https://cricket-cricket.glitch.me">cricket-cricket.glitch.me</a></li>
+    </ul>
       
-      <p>Make sure that chrome://flags/#privacy-sandbox-ads-apis is <strong>disabled</strong>, since the defaults from this will override the command-line flags (in particular, the epoch duration).</p>
-      
-     <p>There are three sites that each make the same <code>fetch()</code> request to <a href="https://topics-server.glitch.me">topics-server.glitch.me</a>:</p>
-      
-      <ul>
-        <li><a href="https://tennis-tennis.glitch.me">tennis-tennis.glitch.me</a></li>
-        <li><a href="https://tennis-tennis-tennis.glitch.me">tennis-tennis-tennis.glitch.me</a></li>
-        <li><a href="https://tennis-tennis-tennis-tennis.glitch.me">tennis-tennis-tennis-tennis.glitch.me</a></li>
-      </ul>
-      
-      <p>Open each of these in a new browser tab. Observed topics will be displayed on these pages after three <a href="https://developer.chrome.com/docs/privacy-sandbox/topics/#how-does-the-topics-api-work">epochs</a> have passed, i.e. after around 45 seconds if you have set the epoch length to 15 seconds, though it may take longer. The observed topics are likely to be those such as <a href="https://github.com/patcg-individual-drafts/topics/blob/main/taxonomy_v1.md#:~:text=299">299</a> or <a href="https://github.com/patcg-individual-drafts/topics/blob/main/taxonomy_v1.md#:~:text=328">328</a> that correspond to an interest in sports and tennis.</p>
-            
-      <p class="warning">This demo isn't anything like a real-world implementation: it only serves to show how topics can be marked as observed, and accessed, using headers.</p>
+    <p>Open each of these in a new browser tab. Observed topics will be displayed on these pages after three <a href="https://developer.chrome.com/docs/privacy-sandbox/topics/#how-does-the-topics-api-work">epochs</a> have passed, i.e. after around 45 seconds if you have set the epoch length to 15 seconds, though it may take longer. The observed topics are likely to be those such as <a href="https://github.com/patcg-individual-drafts/topics/blob/main/taxonomy_v1.md#:~:text=299">299</a> or <a href="https://github.com/patcg-individual-drafts/topics/blob/main/taxonomy_v1.md#:~:text=328">328</a> that correspond to an interest in sports and tennis.</p>
+    <p>If no topics are displayed, navigate repeatedly to the pages listed above, e.g. by refreshing each page (not hard-refresh).</p>
+          
+    <p class="warning">This demo isn't anything like a real-world implementation: it only serves to show how topics can be marked as observed, and accessed, using headers.</p>
      
   </main>
 
@@ -67,6 +74,7 @@
          <li>You don't have an adblocker or a similar app/extension running.</li>
          <li>You're not in Incognito mode.</li>
          <li>You have third-party cookies enabled via Settings → Security and privacy → Cookies, and other site data set to either "Allow all cookies" or "Block third-party cookies in incognito", also accessible via chrome://settings/cookies.</li>
+         <li>Make sure Chrome is not running in the background. Try closing <strong>all</strong> instances of Chrome before launching it from the console.</li>
       </ul>
       
     </details>
@@ -77,7 +85,7 @@
       <summary>Comments and suggestions</summary>
 
       <ul>
-        <li>If you find bugs with this demo or would like to suggest changes, please message <a href="https://twitter.com/sw12">@sw12</a>.</li>
+        <li>If you find bugs with this demo or would like to suggest changes, please message <a href="https://twitter.com/sw12">@sw12</a>. You can also post a comment on <a href="https://github.com/privacysandbox/privacy-sandbox-demos/discussions/253">Privacy Sandbox Demos Discussions</a></li>
         <li>To comment on the API design, please <a href="https://github.com/patcg-individual-drafts/topics/issues/new">create an issue</a> on the explainer repo.</li>
         <li>For general feedback or questions about the Privacy Sandbox, please ask on the <a href="https://github.com/GoogleChromeLabs/privacy-sandbox-dev-support/issues">Privacy Sandbox Dev Support repo</a>.</li>
       </ul>
